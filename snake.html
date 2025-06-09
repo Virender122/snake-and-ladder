@@ -2,42 +2,30 @@
    
     <style>
       body{
-        background-color: rgb(205, 213, 48);;
+        background-color: rgb(161, 125, 48);
       }
-      .button{
-        background-color: rgb(178, 100, 100);
+      .dd{
+        height: 30px;
+        width: 100px;
+        border-radius: 8px;
+        font-size: 20x;
       }
     </style>
         <body>
-        <div id ="abc">
+        <div id ="abc"></div>
          <h2 id= "cd"></h2>
          <h2 id = "de"></h2>
          <h3 id ="vv"></h3>
          <p id ="ar"></p>
-         <button onclick = "clickCounter()"> start</button>
+         <button  class ="dd" onclick = "clickCounter()"> start</button>
          <p><span id ="demo"></span></p>
-         </div>
         <script>
            let d= 0;
            let e=0;
            let p =1;
            const moves = {
-    4: 14,
-    9: 31,
-    17: 7,
-    20: 38,
-    28: 84,
-    40: 59,
-    51: 67,
-    54: 34,
-    62: 19,
-    63: 81,
-    64: 60,
-    71: 91,
-    87: 24,
-    93: 73,
-    95: 75,
-    99: 78
+    4: 14,  9: 31, 17: 7,  20: 38,  28: 84,  40: 59, 51: 67, 54: 34, 62: 19,63: 81,64: 60, 71: 91, 87: 24, 
+    93: 73, 95: 75,  99: 78
   };
             for(let i=100;i>=1;i--){
                 const  l = document.getElementById("abc");
@@ -50,7 +38,6 @@
                 button.style.width = "79px";
                 button.style.fontSize ="20px";
                 button.style.borderRadius= "5px";
-                button.style.borderColor ="black";
                 l.appendChild(button);
                 if((i-1)%10===0){
                      l.appendChild(document.createElement('br'));
@@ -58,7 +45,7 @@
              }
            function clickCounter() {
          if(p==1){
-             document.getElementById("ar").innerText= "X turn";
+             document.getElementById("ar").innerText= "Now Red player turn";
                 const a = Math.floor(Math.random()*6)+1;
                 document.getElementById("vv").innerHTML ="dice number is: "+ a;
                d=d+a;
@@ -83,7 +70,7 @@
                 p=p-1;      
          }
         else{
-            document.getElementById("ar").innerText= "y turn";
+            document.getElementById("ar").innerText= "Now Green player turn";
                 const g= Math.floor(Math.random()*6)+1;
                 document.getElementById("vv").innerHTML ="dice number is "+ g;
                e= e+g;
