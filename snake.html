@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <h1>snake and laddeer
+        </h1>
+    </head>
+    <style>
+      body{
+        background-color: white;;
+      }
+      .abc{
+        background-color: white;
+      }
+    </style>
+        <body>
+        <div id ="abc"></div>
+         <h2 id= "cd"></h2>
+         <h2 id = "de"></h2>
+         <h3 id ="vv"></h3>
+         <p id ="ar"></p>
+         <button onclick = "clickCounter()"> start</button>
+         <p><span id ="demo"></span></p>
+        <script>
+           let d= 0;
+           let e=0;
+           let p =1;
+           const moves = {
+    4: 14,
+    9: 31,
+    17: 7,
+    20: 38,
+    28: 84,
+    40: 59,
+    51: 67,
+    54: 34,
+    62: 19,
+    63: 81,
+    64: 60,
+    71: 91,
+    87: 24,
+    93: 73,
+    95: 75,
+    99: 78
+  };
+            for(let i=100;i>=1;i--){
+                const  l = document.getElementById("abc");
+                const button = document.createElement('button'); 
+                button.innerText = i;
+                button.id = "b"+i;
+                button.style.border="none";
+                button.style.margin ='0px';
+                button.style.height= '60px';
+                button.style.width = "60px";
+                button.style.fontSize ="25px";
+                l.appendChild(button);
+                if((i-1)%10===0){
+                     l.appendChild(document.createElement('br'));
+                }  
+             }
+           function clickCounter() {
+         if(p==1){
+             document.getElementById("ar").innerText= "X turn";
+                const a = Math.floor(Math.random()*6)+1;
+                document.getElementById("vv").innerHTML ="dice number is: "+ a;
+              d=d+a;
+                document.getElementById("cd").innerHTML= d;
+              document.getElementById("b"+d).style.backgroundColor ="green";
+              document.getElementById("b"+(d-a)).style.backgroundColor ="#F8F8FF";
+              if(moves[d]){
+                d=moves[d];
+              }
+                  if(d>100){
+                  d=d-a;
+                }
+               if(d==100){
+                window.alert("green win");
+                p=1;
+                }
+                else{
+               p=p-1;
+                }    
+         }
+        else{
+            document.getElementById("ar").innerText= "y turn";
+                const g= Math.floor(Math.random()*6)+1;
+                document.getElementById("vv").innerHTML ="dice number is "+ g;
+              e= e+g;
+              document.getElementById("b"+e).style.backgroundColor ="red";
+              document.getElementById("b"+(e-g)).style.backgroundColor ="#F8F8FF";
+              if(moves[e]){
+                e=moves[e];
+              }
+               if(e>100){
+                  e=e-g;
+                }
+                //  document.getElementById("b"+(e-g)).style.backgroundColor ="white";
+              document.getElementById("de").innerHTML = e;
+                 if(e==100){
+               // document.getElementById("de").innerText = "Y win";
+               window.alert("red win");
+                p=0;
+                }
+                else{
+                p =p+1;
+                }
+             }
+           }
+            </script>
+    </body>
+</html>
