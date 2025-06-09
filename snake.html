@@ -1,24 +1,22 @@
 <html>
-    <head>
-        <h1>snake and laddeer
-        </h1>
-    </head>
+   
     <style>
       body{
-        background-color: white;;
+        background-color: rgb(205, 213, 48);;
       }
-      .abc{
-        background-color: white;
+      .button{
+        background-color: rgb(178, 100, 100);
       }
     </style>
         <body>
-        <div id ="abc"></div>
+        <div id ="abc">
          <h2 id= "cd"></h2>
          <h2 id = "de"></h2>
          <h3 id ="vv"></h3>
          <p id ="ar"></p>
          <button onclick = "clickCounter()"> start</button>
          <p><span id ="demo"></span></p>
+         </div>
         <script>
            let d= 0;
            let e=0;
@@ -46,11 +44,13 @@
                 const button = document.createElement('button'); 
                 button.innerText = i;
                 button.id = "b"+i;
-                button.style.border="none";
-                button.style.margin ='0px';
-                button.style.height= '60px';
-                button.style.width = "60px";
-                button.style.fontSize ="25px";
+                button.style.border="1px";
+                button.style.margin ='2px';
+                button.style.height= '45px';
+                button.style.width = "79px";
+                button.style.fontSize ="20px";
+                button.style.borderRadius= "5px";
+                button.style.borderColor ="black";
                 l.appendChild(button);
                 if((i-1)%10===0){
                      l.appendChild(document.createElement('br'));
@@ -61,47 +61,51 @@
              document.getElementById("ar").innerText= "X turn";
                 const a = Math.floor(Math.random()*6)+1;
                 document.getElementById("vv").innerHTML ="dice number is: "+ a;
-              d=d+a;
-                document.getElementById("cd").innerHTML= d;
-              document.getElementById("b"+d).style.backgroundColor ="green";
-              document.getElementById("b"+(d-a)).style.backgroundColor ="#F8F8FF";
-              if(moves[d]){
-                d=moves[d];
-              }
-                  if(d>100){
+               d=d+a;
+               if(d>100){
                   d=d-a;
                 }
-               if(d==100){
-                window.alert("green winner");
-                p=1;
+              document.getElementById("cd").innerHTML= d;
+              document.getElementById("b"+d).style.backgroundColor ="green";
+              p=p-1;
+              document.getElementById("b"+(d-a)).style.backgroundColor ="#F8F8FF"; 
+               
+                 if(d==100){
+                 window.alert("green winner");
+                 p=p+2;
                 }
-                else{
-               p=p-1;
-                }    
+                else if(moves[d]){
+                document.getElementById("b"+(d)).style.backgroundColor="#F8F8FF";
+                 d=moves[d];
+                  document.getElementById("cd").innerHTML= d;
+                  document.getElementById("b"+d).style.backgroundColor ="green";
+               }
+                p=p-1;      
          }
         else{
             document.getElementById("ar").innerText= "y turn";
                 const g= Math.floor(Math.random()*6)+1;
                 document.getElementById("vv").innerHTML ="dice number is "+ g;
-              e= e+g;
-              document.getElementById("b"+e).style.backgroundColor ="red";
-              document.getElementById("b"+(e-g)).style.backgroundColor ="#F8F8FF";
-              if(moves[e]){
-                e=moves[e];
-              }
-               if(e>100){
+               e= e+g;
+                if(e>100){
                   e=e-g;
                 }
-                //  document.getElementById("b"+(e-g)).style.backgroundColor ="white";
-              document.getElementById("de").innerHTML = e;
-                 if(e==100){
-               // document.getElementById("de").innerText = "Y win";
+               document.getElementById("de").innerHTML = e;
+              document.getElementById("b"+e).style.backgroundColor ="red";
+              p=p+1;
+             document.getElementById("b"+(e-g)).style.backgroundColor ="#F8F8FF"; 
+              
+                if(e==100){
                window.alert("red winner");
-                p=0;
+                p=p+2;
                 }
-                else{
+               else  if(moves[e]){
+                   document.getElementById("b"+(e)).style.backgroundColor="#F8F8FF";
+                     e=moves[e];
+                      document.getElementById("de").innerHTML = e;
+                      document.getElementById("b"+e).style.backgroundColor ="red"; 
+              }
                 p =p+1;
-                }
              }
            }
             </script>
