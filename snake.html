@@ -1,5 +1,4 @@
 <html>
-   
     <style>
       body{
         background-color: rgb(205, 213, 48);;
@@ -22,22 +21,8 @@
            let e=0;
            let p =1;
            const moves = {
-    4: 14,
-    9: 31,
-    17: 7,
-    20: 38,
-    28: 84,
-    40: 59,
-    51: 67,
-    54: 34,
-    62: 19,
-    63: 81,
-    64: 60,
-    71: 91,
-    87: 24,
-    93: 73,
-    95: 75,
-    99: 78
+        4: 14,9: 31, 17: 7, 20: 38, 28: 84, 40: 59,51: 67, 54: 34,
+        62: 19, 63: 81,64: 60, 71: 91,87: 24, 93: 73, 95: 75, 99: 78
   };
             for(let i=100;i>=1;i--){
                 const  l = document.getElementById("abc");
@@ -50,7 +35,6 @@
                 button.style.width = "79px";
                 button.style.fontSize ="20px";
                 button.style.borderRadius= "5px";
-                button.style.borderColor ="black";
                 l.appendChild(button);
                 if((i-1)%10===0){
                      l.appendChild(document.createElement('br'));
