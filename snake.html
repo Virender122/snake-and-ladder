@@ -1,47 +1,68 @@
-<html>
-    <style>
-      body{
-        background-color: rgb(161, 125, 48);
-      }
-      .dd{
-        height: 30px;
-        width: 100px;
-        border-radius: 8px;
-        font-size: 20x;
-      }
-    </style>
-        <body>
-           <button  class ="dd" onclick = "clickCounter()"> start</button>
-        <div id ="abc"></div>
+<html >
+<head>
+  <title>Snake and Ladder</title>
+  <style>
+    body {
+      
+      background-color: rgb(226, 152, 32);
+      justify-content: center;
+    }
+    .board {
+      display: grid;
+      grid-template-columns: repeat(10, 45px);
+      grid-template-rows: repeat(10, 45px);
+      gap: 6px;
+    }
+    .cell {
+      width: 50px;
+      height: 50px;
+      background-color: #f4f4f4;
+        justify-content: center;
+     text-align: center;
+     border-radius:10px;
+     border: 4px;
+    }
+  </style>
+</head>
+<body>
+<button  class ="dd" onclick = "clickCounter()"> start</button><br>
+<div class="board" id="abc"></div>
          <h2 id= "cd"></h2>
          <h2 id = "de"></h2>
          <h3 id ="vv"></h3>
          <p id ="ar"></p>
-         <p><span id ="demo"></span></p>
-        <script>
-           let d= 0;
-           let e=0;
-           let p =1;
-           const moves = {
+          <p><span id ="demo"></span></p>
+
+<script>
+  let d= 0;
+  let e=0;
+  let p =1;
+   const moves = {
     4: 14,  9: 31, 17: 7,  20: 38,  28: 84,  40: 59, 51: 67, 54: 34, 62: 19,63: 81,64: 60, 71: 91, 87: 24, 
     93: 73, 95: 75,  99: 78
   };
-            for(let i=100;i>=1;i--){
-                const  l = document.getElementById("abc");
-                const button = document.createElement('button'); 
-                button.innerText = i;
-                button.id = "b"+i;
-                button.style.border="1px";
-                button.style.margin ='2px';
-                button.style.height= '45px';
-                button.style.width = "79px";
-                button.style.fontSize ="20px";
-                button.style.borderRadius= "5px";
-                l.appendChild(button);
-                if((i-1)%10===0){
-                     l.appendChild(document.createElement('br'));
-                }  
-             }
+  const board = document.getElementById("abc");
+
+  for (let row = 9; row >= 0; row--) {
+    let rowCells = [];
+
+    for (let col = 0; col < 10; col++) {
+      let num = row * 10 + col + 1;
+      rowCells.push(num);
+    }
+    if (row % 2 === 1) {
+      rowCells.reverse();
+    }
+
+    rowCells.forEach(num => {
+      const cell = document.createElement("div");
+      cell.className = "cell";
+     cell.textContent = num;
+     cell.id = "b"+num
+      board.appendChild(cell);
+    });
+  }
+  
            function clickCounter() {
          if(p==1){
              document.getElementById("ar").innerText= "Now Red player turn";
@@ -51,7 +72,7 @@
                if(d>100){
                   d=d-a;
                 }
-              document.getElementById("cd").innerHTML= d;
+              document.getElementById("cd").innerHTML= "green player :"+d;
               document.getElementById("b"+d).style.backgroundColor ="green";
               p=p-1;
               document.getElementById("b"+(d-a)).style.backgroundColor ="#F8F8FF"; 
@@ -76,7 +97,7 @@
                 if(e>100){
                   e=e-g;
                 }
-               document.getElementById("de").innerHTML = e;
+               document.getElementById("de").innerHTML = "red player  : "+e;
               document.getElementById("b"+e).style.backgroundColor ="red";
               p=p+1;
              document.getElementById("b"+(e-g)).style.backgroundColor ="#F8F8FF"; 
@@ -97,3 +118,4 @@
             </script>
     </body>
 </html>
+ 
