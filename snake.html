@@ -41,25 +41,25 @@
     4: 14,  9: 31, 17: 7,  20: 38,  28: 84,  40: 59, 51: 67, 54: 34, 62: 19,63: 81,64: 60, 71: 91, 87: 24, 
     93: 73, 95: 75,  99: 78
   };
-  const board = document.getElementById("abc");
+  const bt = document.getElementById("abc");
 
-  for (let row = 9; row >= 0; row--) {
-    let rowCells = [];
+  for (let i = 9; i >= 0; i--) {
+    let iCells = [];
 
-    for (let col = 0; col < 10; col++) {
-      let num = row * 10 + col + 1;
-      rowCells.push(num);
+    for (let j = 0; j < 10; j++) {
+      let n = i * 10 + j + 1;
+      iCells.push(n);
     }
-    if (row % 2 === 1) {
-      rowCells.reverse();
+    if (i % 2 === 1) {
+      iCells.reverse();
     }
 
-    rowCells.forEach(num => {
+    iCells.forEach(n => {
       const cell = document.createElement("div");
       cell.className = "cell";
-     cell.textContent = num;
-     cell.id = "b"+num
-      board.appendChild(cell);
+     cell.textContent = n;
+     cell.id = "b"+n;
+      bt.appendChild(cell);
     });
   }
   
@@ -78,13 +78,13 @@
               document.getElementById("b"+(d-a)).style.backgroundColor ="#F8F8FF"; 
                
                  if(d==100){
-                 window.alert("green winner");
+                 window.alert("green winner 🎉");
                  p=p+2;
                 }
                 else if(moves[d]){
                 document.getElementById("b"+(d)).style.backgroundColor="#F8F8FF";
                  d=moves[d];
-                  document.getElementById("cd").innerHTML= d;
+                  document.getElementById("cd").innerHTML="green player :"+ d;
                   document.getElementById("b"+d).style.backgroundColor ="green";
                }
                 p=p-1;      
@@ -103,13 +103,13 @@
              document.getElementById("b"+(e-g)).style.backgroundColor ="#F8F8FF"; 
               
                 if(e==100){
-               window.alert("red winner");
+               window.alert("red winner 🎉");
                 p=p+2;
                 }
                else  if(moves[e]){
                    document.getElementById("b"+(e)).style.backgroundColor="#F8F8FF";
                      e=moves[e];
-                      document.getElementById("de").innerHTML = e;
+                      document.getElementById("de").innerHTML ="red player  :"+ e;
                       document.getElementById("b"+e).style.backgroundColor ="red"; 
               }
                 p =p+1;
