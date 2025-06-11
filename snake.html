@@ -2,35 +2,83 @@
 <head>
   <title>Snake and Ladder</title>
   <style>
-    body {
-      
-      background-color: rgb(226, 152, 32);
-      justify-content: center;
-    }
-    .board {
-      display: grid;
-      grid-template-columns: repeat(10, 45px);
-      grid-template-rows: repeat(10, 45px);
-      gap: 6px;
-    }
+   
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: 100px;
+  background-color: blueviolet;
+  margin: 0;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(10, 45px);
+  grid-template-rows: repeat(10, 45px);
+  gap: 3px;
+  padding: 8px;
+  background-image: url('snap.jpg'); /* 🖼️ Your board image here */
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 20px black;
+  height: 458px;
+  width: 458px;
+}
+
+    
     .cell {
-      width: 50px;
-      height: 50px;
-      background-color: #f4f4f4;
-        justify-content: center;
+      width: 35px;
+      height: 35px;
+     justify-content: center;
      text-align: center;
      border-radius:10px;
      border: 4px;
     }
+    .dd {
+  position: absolute;
+  left: 20px;          /* Distance from the left */
+  top: 30%;
+  transform: translateY(-50%);
+  padding: 10px 20px;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 2px 2px 10px black;
+}
+.player-info{
+  position: absolute;
+  left: 20px;          /* Distance from the left */
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 10px 20px;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
   </style>
+ <b><h1> 🐍Snake and 🪜Ladder</h1></b>
 </head>
-<body>
-<button  class ="dd" onclick = "clickCounter()"> start</button><br>
-<div class="board" id="abc"></div>
-         <h2 id= "cd"></h2>
-         <h2 id = "de"></h2>
-         <h3 id ="vv"></h3>
-         <p id ="ar"></p>
+<body >
+<button  class ="dd" onclick = "clickCounter()"> start</button>
+<img src ="th.jpg" height ="40px" width="40px">
+<h3 id ="bb"></h3>
+ <div class="game-container">
+    <div class="board" id="abc"></div>
+    <div class="player-info">
+      <h2 id="cd">Green player: 0</h2>
+      <h2 id="de">Red player: 0</h2>
+      <h3 id="vv"></h3>
+      <p id="ar"></p>
+      <p><span id="demo"></span></p>
+    </div>
+  </div>
           <p><span id ="demo"></span></p>
 
 <script>
@@ -38,16 +86,16 @@
   let e=0;
   let p =1;
    const moves = {
-    4: 14,  9: 31, 17: 7,  20: 38,  28: 84,  40: 59, 51: 67, 54: 34, 62: 19,63: 81,64: 60, 71: 91, 87: 24, 
-    93: 73, 95: 75,  99: 78
+   95: 36, 92: 52,  81: 78,  50: 16,  40: 20, 4: 22, 10: 29, 14: 77 ,33: 51,64: 82, 74: 92
   };
   const bt = document.getElementById("abc");
+
 
   for (let i = 9; i >= 0; i--) {
     let iCells = [];
 
-    for (let j = 0; j < 10; j++) {
-      let n = i * 10 + j + 1;
+    for (let j = 1; j <= 10; j++) {
+      let n = i * 10 + j ;
       iCells.push(n);
     }
     if (i % 2 === 1) {
@@ -57,64 +105,102 @@
     iCells.forEach(n => {
       const cell = document.createElement("div");
       cell.className = "cell";
-     cell.textContent = n;
      cell.id = "b"+n;
       bt.appendChild(cell);
     });
   }
-  
-           function clickCounter() {
-         if(p==1){
-             document.getElementById("ar").innerText= "Now Red player turn";
-                const a = Math.floor(Math.random()*6)+1;
-                document.getElementById("vv").innerHTML ="dice number is: "+ a;
-               d=d+a;
-               if(d>100){
-                  d=d-a;
-                }
-              document.getElementById("cd").innerHTML= "green player :"+d;
-              document.getElementById("b"+d).style.backgroundColor ="green";
-              p=p-1;
-              document.getElementById("b"+(d-a)).style.backgroundColor ="#F8F8FF"; 
-               
-                 if(d==100){
-                 window.alert("green winner 🎉");
-                 p=p+2;
-                }
-                else if(moves[d]){
-                document.getElementById("b"+(d)).style.backgroundColor="#F8F8FF";
-                 d=moves[d];
-                  document.getElementById("cd").innerHTML="green player :"+ d;
-                  document.getElementById("b"+d).style.backgroundColor ="green";
-               }
-                p=p-1;      
-         }
-        else{
-            document.getElementById("ar").innerText= "Now Green player turn";
-                const g= Math.floor(Math.random()*6)+1;
-                document.getElementById("vv").innerHTML ="dice number is "+ g;
-               e= e+g;
-                if(e>100){
-                  e=e-g;
-                }
-               document.getElementById("de").innerHTML = "red player  : "+e;
-              document.getElementById("b"+e).style.backgroundColor ="red";
-              p=p+1;
-             document.getElementById("b"+(e-g)).style.backgroundColor ="#F8F8FF"; 
-              
-                if(e==100){
-               window.alert("red winner 🎉");
-                p=p+2;
-                }
-               else  if(moves[e]){
-                   document.getElementById("b"+(e)).style.backgroundColor="#F8F8FF";
-                     e=moves[e];
-                      document.getElementById("de").innerHTML ="red player  :"+ e;
-                      document.getElementById("b"+e).style.backgroundColor ="red"; 
-              }
-                p =p+1;
-             }
-           }
+let prevGreen = 0;
+let prevRed = 0;
+let prevOverlap = 0;
+function clickCounter() {
+  if (p == 1) {
+    document.getElementById("ar").innerText = "Now Red player turn";
+    const a = Math.floor(Math.random() * 6) + 1;
+    document.getElementById("vv").innerHTML = "Dice number is: " + a;
+     d = d + a;
+    if (d > 100) {
+      d = d - a;
+    }
+    // Reset previous green cell
+    if (prevGreen !== 0 && prevGreen !== e) {
+      document.getElementById("b" + prevGreen).style.backgroundColor = "";
+    }
+    prevGreen = d;
+    changecolor();
+    document.getElementById("cd").innerHTML = "Green player: " + d;
+    document.getElementById("b" + d).style.backgroundColor = "green";
+    p=0;
+    if (d == 100) {
+      p = 1;
+      document.getElementById("bb").innerHTML = "Green player wins!";
+      //alert("green player win");
+    } else if (moves[d]) {
+      document.getElementById("b" + d).style.backgroundColor = "";
+      d = moves[d];
+      prevGreen = d;
+      document.getElementById("cd").innerHTML = "Green player: " + d;
+      document.getElementById("b" + d).style.backgroundColor = "green";
+    }
+  }
+ else {
+    document.getElementById("ar").innerText = "Now Green player turn";
+
+    const g = Math.floor(Math.random() * 6) + 1;
+    document.getElementById("vv").innerHTML = "Dice number is: " + g;
+    e = e + g;
+    if (e > 100) {
+      e = e - g;
+    }
+
+    // Reset previous red cell
+    if (prevRed !== 0 && prevRed !== d) {
+      document.getElementById("b" + prevRed).style.backgroundColor = "";
+    }
+    prevRed = e;
+    changecolor();
+    document.getElementById("de").innerHTML = "Red player: " + e;
+    document.getElementById("b" + e).style.backgroundColor = "red";
+    p = 1;
+    if (e == 100) {
+      document.getElementById("bb").innerHTML = "Red player wins!";
+      p = 3;
+       //alert("red player win");
+    } else if (moves[e]) {
+      document.getElementById("b" + e).style.backgroundColor = "";
+      e = moves[e];
+      prevRed = e;
+      document.getElementById("de").innerHTML = "Red player: " + e;
+      document.getElementById("b" + e).style.backgroundColor = "red";
+    }
+  }
+
+ function changecolor() {
+  // Case: both players are on same cell now
+  if (d === e) {
+    document.getElementById("b" + d).style.background = "linear-gradient(red, green)";
+    prevOverlap = d;
+  } else {
+    // If they were overlapping before and now they're not
+    if (prevOverlap !== 0) {
+      const overlapCell = document.getElementById("b" + prevOverlap);
+
+      // Decide who stayed and who moved
+      if (d === prevOverlap) {
+        overlapCell.style.background = "green";
+      } else if (e === prevOverlap) {
+        overlapCell.style.background = "red";
+      } else {
+        overlapCell.style.background = "";
+      }
+
+      prevOverlap = 0; // Clear overlap
+    }
+  }
+}
+
+
+}
+
             </script>
     </body>
 </html>
