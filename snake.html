@@ -10,7 +10,6 @@ body {
   flex-direction: column;
   min-height: 100px;
   background-color: blueviolet;
-  margin: 0;
 }
 
 .board {
@@ -19,16 +18,14 @@ body {
   grid-template-rows: repeat(10, 45px);
   gap: 3px;
   padding: 8px;
-  background-image: url('snap.jpg'); /* 🖼️ Your board image here */
+  background-image: url('snap.jpg');
   background-size: cover;
   background-position: center;
   box-shadow: 0 0 20px black;
   height: 458px;
   width: 458px;
-}
-
-    
-    .cell {
+} 
+ .cell {
       width: 35px;
       height: 35px;
      justify-content: center;
@@ -38,28 +35,20 @@ body {
     }
     .dd {
   position: absolute;
-  left: 20px;          /* Distance from the left */
+  left: 20px;      
   top: 30%;
-  transform: translateY(-50%);
-  padding: 10px 20px;
-  color: black;
-  border: none;
+  padding: 10px ;
   border-radius: 10px;
   font-size: 16px;
-  cursor: pointer;
-  box-shadow: 2px 2px 10px black;
 }
 .player-info{
   position: absolute;
-  left: 20px;          /* Distance from the left */
+  left: 20px;        
   top: 50%;
-  transform: translateY(-50%);
-  padding: 10px 20px;
+  padding: 10px ;
   color: black;
-  border: none;
   border-radius: 10px;
   font-size: 16px;
-  cursor: pointer;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
   </style>
@@ -67,7 +56,11 @@ body {
 </head>
 <body >
 <button  class ="dd" onclick = "clickCounter()"> start</button>
-<img src ="th.jpg" height ="40px" width="40px">
+<audio src ="dice.mp3" id ="myaudio"></audio>
+<audio src ="ladder.mp3" id ="laddervoice"></audio>
+<audio src ="snakebite.mp3" id ="bite"></audio>
+<audio src="win.mp3" id ="winner"></audio>
+<img  id = "images" src ="one.jpg" height ="60px" width="60px">
 <h3 id ="bb"></h3>
  <div class="game-container">
     <div class="board" id="abc"></div>
@@ -79,18 +72,15 @@ body {
       <p><span id="demo"></span></p>
     </div>
   </div>
-          <p><span id ="demo"></span></p>
-
+      <p><span id ="demo"></span></p>
 <script>
   let d= 0;
   let e=0;
   let p =1;
    const moves = {
-   95: 36, 92: 52,  81: 78,  50: 16,  40: 20, 4: 22, 10: 29, 14: 77 ,33: 51,64: 82, 74: 92
+   95: 36, 92:52,  81: 78,  50: 16,  40: 20, 4: 22, 10: 29, 14: 77 ,33: 51,64: 82, 74: 92
   };
   const bt = document.getElementById("abc");
-
-
   for (let i = 9; i >= 0; i--) {
     let iCells = [];
 
@@ -102,13 +92,14 @@ body {
       iCells.reverse();
     }
 
-    iCells.forEach(n => {
+    iCells.forEach(function(n) {
       const cell = document.createElement("div");
       cell.className = "cell";
      cell.id = "b"+n;
       bt.appendChild(cell);
     });
   }
+  
 let prevGreen = 0;
 let prevRed = 0;
 let prevOverlap = 0;
@@ -116,12 +107,31 @@ function clickCounter() {
   if (p == 1) {
     document.getElementById("ar").innerText = "Now Red player turn";
     const a = Math.floor(Math.random() * 6) + 1;
+    document.getElementById("myaudio").play();
     document.getElementById("vv").innerHTML = "Dice number is: " + a;
+    const img = document.getElementById("images");
+      if(a===1){
+        img.src="one.jpg";
+      }
+      else if(a===2){
+        img.src = "two.webp";
+      }
+      else if(a===3){
+        img.src = "three.webp";
+      }
+      else if(a===4){
+        img.src = "four.png";
+      }
+      else if(a===5){
+        img.src = "five.jpg";
+      }
+      else if(a===6){
+        img.src = "six.png";
+      }
      d = d + a;
     if (d > 100) {
       d = d - a;
     }
-    // Reset previous green cell
     if (prevGreen !== 0 && prevGreen !== e) {
       document.getElementById("b" + prevGreen).style.backgroundColor = "";
     }
@@ -132,11 +142,14 @@ function clickCounter() {
     p=0;
     if (d == 100) {
       p = 1;
+     // console.log(d,'value of d ')
+     document.getElementById("winner").play();
       document.getElementById("bb").innerHTML = "Green player wins!";
       //alert("green player win");
     } else if (moves[d]) {
       document.getElementById("b" + d).style.backgroundColor = "";
       d = moves[d];
+       document.getElementById("laddervoice").play();
       prevGreen = d;
       document.getElementById("cd").innerHTML = "Green player: " + d;
       document.getElementById("b" + d).style.backgroundColor = "green";
@@ -144,15 +157,33 @@ function clickCounter() {
   }
  else {
     document.getElementById("ar").innerText = "Now Green player turn";
-
     const g = Math.floor(Math.random() * 6) + 1;
+     document.getElementById("myaudio").play();
     document.getElementById("vv").innerHTML = "Dice number is: " + g;
+     const img = document.getElementById("images");
+      if(g===1){
+        img.src="one.jpg";
+      }
+      else if(g===2){
+        img.src = "two.webp";
+      }
+      else if(g===3){
+        img.src = "three.webp";
+      }
+      else if(g===4){
+        img.src = "four.png";
+      }
+      else if(g===5){
+        img.src = "five.jpg";
+      }
+      else if(g===6){
+        img.src = "six.png";
+      }
+  
     e = e + g;
     if (e > 100) {
       e = e - g;
     }
-
-    // Reset previous red cell
     if (prevRed !== 0 && prevRed !== d) {
       document.getElementById("b" + prevRed).style.backgroundColor = "";
     }
@@ -162,29 +193,26 @@ function clickCounter() {
     document.getElementById("b" + e).style.backgroundColor = "red";
     p = 1;
     if (e == 100) {
+         document.getElementById("winner").play();
       document.getElementById("bb").innerHTML = "Red player wins!";
       p = 3;
        //alert("red player win");
     } else if (moves[e]) {
       document.getElementById("b" + e).style.backgroundColor = "";
       e = moves[e];
+      document.getElementById("laddervoice").play();
       prevRed = e;
       document.getElementById("de").innerHTML = "Red player: " + e;
       document.getElementById("b" + e).style.backgroundColor = "red";
     }
   }
-
  function changecolor() {
-  // Case: both players are on same cell now
   if (d === e) {
     document.getElementById("b" + d).style.background = "linear-gradient(red, green)";
     prevOverlap = d;
   } else {
-    // If they were overlapping before and now they're not
     if (prevOverlap !== 0) {
       const overlapCell = document.getElementById("b" + prevOverlap);
-
-      // Decide who stayed and who moved
       if (d === prevOverlap) {
         overlapCell.style.background = "green";
       } else if (e === prevOverlap) {
@@ -192,16 +220,11 @@ function clickCounter() {
       } else {
         overlapCell.style.background = "";
       }
-
-      prevOverlap = 0; // Clear overlap
+      prevOverlap = 0; 
     }
   }
 }
-
-
-}
-
-            </script>
+}       </script>
     </body>
 </html>
  
