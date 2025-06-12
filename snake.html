@@ -77,8 +77,11 @@ body {
   let d= 0;
   let e=0;
   let p =1;
-   const moves = {
-   95: 36, 92:52,  81: 78,  50: 16,  40: 20, 4: 22, 10: 29, 14: 77 ,33: 51,64: 82, 74: 92
+   const Snakes = {
+   95: 36, 92 : 52,  81: 78,  50: 16,  40: 20 
+  };
+  const ladders ={
+    4: 22, 10: 29, 14: 77 ,33: 51,64: 82, 74: 92
   };
   const bt = document.getElementById("abc");
   for (let i = 9; i >= 0; i--) {
@@ -142,13 +145,20 @@ function clickCounter() {
     p=0;
     if (d == 100) {
       p = 1;
-     // console.log(d,'value of d ')
      document.getElementById("winner").play();
       document.getElementById("bb").innerHTML = "Green player wins!";
-      //alert("green player win");
-    } else if (moves[d]) {
+    }
+     else if (Snakes[d]) {
       document.getElementById("b" + d).style.backgroundColor = "";
-      d = moves[d];
+      d = Snakes[d];
+       document.getElementById("bite").play();
+      prevGreen = d;
+      document.getElementById("cd").innerHTML = "Green player: " + d;
+      document.getElementById("b" + d).style.backgroundColor = "green";
+    }
+     else if (ladders[d]) {
+      document.getElementById("b" + d).style.backgroundColor = "";
+      d = ladders[d];
        document.getElementById("laddervoice").play();
       prevGreen = d;
       document.getElementById("cd").innerHTML = "Green player: " + d;
@@ -196,10 +206,19 @@ function clickCounter() {
          document.getElementById("winner").play();
       document.getElementById("bb").innerHTML = "Red player wins!";
       p = 3;
-       //alert("red player win");
-    } else if (moves[e]) {
+      let r=6
+    } 
+    else if (Snakes[e]) {
       document.getElementById("b" + e).style.backgroundColor = "";
-      e = moves[e];
+      e = Snakes[e];
+      document.getElementById("bite").play();
+      prevRed = e;
+      document.getElementById("de").innerHTML = "Red player: " + e;
+      document.getElementById("b" + e).style.backgroundColor = "red";
+    }
+     else if (ladders[e]) {
+      document.getElementById("b" + e).style.backgroundColor = "";
+      e = ladders[e];
       document.getElementById("laddervoice").play();
       prevRed = e;
       document.getElementById("de").innerHTML = "Red player: " + e;
